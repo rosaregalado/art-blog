@@ -1,62 +1,86 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-from datetime import datetime
 import os
+import bcrypt
 
 host = os.environ.get('MONGODB_URI')
 client = MongoClient(host)
-db = client.StockHome
+db = client.ecommerce_app
 
 # db resources
+users = db.users
 items = db.items
 
 
 app = Flask(__name__)
 
 # ----------------------------------------------------------
-#root route
+# users routes
+
 @app.route('/')
 def index():
-  # home page
-  return render_template('index.html', items=items.find())
+  if 'username' in session:
+    # return 'You are logged in as ' + session['username']
+    return redirect(url_for('profile'))
 
-# show item
-@app.route('/items/<item_id>')
-def item_show(item_id):
-  item = items.find_one({'_id': ObjectId(item_id)})
-  return render_template('item.html', item=item)
 
-# create new item
-@app.route('/items/new', methods=['POST'])
-def new_item():
-  item = {
-    'item_image': request.form.get('item_image'),
-    'item_name': request.form.get('item_name'),
-    'item_description': request.form.get('item_description'),
-    'item_price': request.form.get('item_price')
-  }
-  # add item to db
-  item_id = items.insert_one(item).inserted_id
-  return render_template('new_item.html', item_id=item_id)
 
-# update item
-@app.route('/items/<item_id>', methods=['POST'])
-def item_update(item_id):
-  updated_item = {
-    'item_image': request.form.get('item_image'),
-    'item_name': request.form.get('item_name'),
-    'item_description': request.form.get('item_description'),
-    'item_price': request.form.get('item_price')
-  }
-  # set former item to updated item
-  items.update_one(
-    {'_id': ObjectId(item_id)},
-    {'$set': updated_item}
-  )
-  return redirect(url_for('items_show', item_id=item_id))
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+  if request.method == 'POST':
+    existing_user = users.find_one({'name': request.form['username']})
 
-# show all items
+    if existing_user is None:
+      hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8') , bcrypt.gensalt())
+      users.insert({'name': request.form['username'], 'password': hashpass})
+      # create session
+      session['username'] = request.form['username']
+      return redirect(url_for('index'))
+
+    return 'That username already exists!'
+  # else request.method=GET
+  return render_template('register.html')
+
+
+@app.route('/login', methods=['POST'])
+def login():
+  login_user = users.find_one({'name': request.form['username']})
+
+  if login_user:
+    # checks if passwords are same
+    if bcrypt.hashpw(request.form['pass'], login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+      # add user to session
+      session['username'] = request.form['username']
+      return redirect(url_for('login_index'))
+
+  # if password is wrong or username doesnt exist
+  return 'Invalid username/password combination'
+
+@app.route('/logout')
+def logout():
+  session['username'] = None
+  session['password'] = None
+  
+  return redirect(url_for('login'))
+# ----------------------------------------------------------
+# other routes
+
+@app.route('/profile')
+def profile():
+  return render_template('profile.html')
+
+@app.route('/inspiration')
+def inspiration():
+  return render_template('inspiration.html')
+
+@app.route('/poems')
+def poems():
+  return render_template('poems.html')
+
+@app.route('/stories')
+def stories():
+  return render_template('stories.html')
 
 
 
@@ -64,4 +88,5 @@ def item_update(item_id):
 
 
 if __name__ == "__main__":
+  app.secret_key = 'mysecret'
   app.run(debug=True)
