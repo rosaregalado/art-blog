@@ -10,7 +10,6 @@ db = client.ecommerce_app
 
 # db resources
 users = db.users
-items = db.items
 
 
 app = Flask(__name__)
