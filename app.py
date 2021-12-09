@@ -62,17 +62,10 @@ def login():
 def logout():
   session.pop('username')
   flash("logged out", "warning")
-  return redirect(url_for('login'))
-# ----------------------------------------------------------
-# other routes
+  return redirect(url_for('index'))
 
-@app.route('/profile')
-def profile():
-  return render_template('profile.html')
-
-@app.route('/photography')
-def photography():
-  return render_template('photography.html')
+# ---------------------------------------------------------------------------------
+# poems routes
 
 @app.route('/poetry')
 def poetry():
@@ -96,13 +89,30 @@ def submit_poem():
     flash("You must be logged in to continue", "warning")
     return redirect(url_for('index'))
 
+@app.route('/poems/<poem_id>')
+def view_poem(poem_id):
+  poem = poems.find_one({'_id': ObjectId(poem_id)})
+  return render_template('view_poem.html', poem=poem)
+
+
+
+# ----------------------------------------------------------
+# other routes
+
+@app.route('/profile')
+def profile():
+  return render_template('profile.html')
+
+@app.route('/photography')
+def photography():
+  return render_template('photography.html')
 
 @app.route('/stories')
 def stories():
   return render_template('stories.html')
 
 
-
+# ----------------------------------------------------------
 
 
 

@@ -1,22 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container p-5">
   <div class="row">
-    <div class="container d-flex flex-column justify-content-center align-items-center" style="height: 40vh;">
+    <div class="card container d-flex flex-column justify-content-center align-items-center" style="height: 60vh; width: 40vw; background-color: rgb(103, 213, 228);">
+      <legend class='text-center p-3 fs-2'>Create an Account</legend>
       <!-- username -->
-      <form method=POST action="{{ url_for('register') }}">
-        <div class="form-group">
+      <form class="form justify-content-around" method=POST action="{{ url_for('register') }}">
+        <div class="form-group p-3">
           <label for="inputUser">Username</label>
           <input type="text" class="form-control" name="username" placeholder="Username">
         </div>
         <!-- password -->
-        <div class="form-group">
+        <div class="form-group p-3">
           <label for="inputPassword">Password</label>
           <input type="password" class="form-control" name="pass" placeholder="Password">
         </div>
         <!-- button -->
-        <button type="submit" class="btn btn-primary btn-block">Register</button>
+        <div class='p-3'>
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </div>
       </form>
       <br>
     </div>

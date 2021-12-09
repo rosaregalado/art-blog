@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='p-3 m-5'>
+  <button type="button" class='btn btn-primary fs-4'><a style="text-decoration: none; color: white;" href='/poetry'>
+    Go back</a>
+  </button>
+</div>
+
+<div class="card p-5 m-5" style='width: 40vw; align-items: center;'>
+  <div class="p-5">
+    <h1 class="text-center pb-3">{{poem.title}}</h1>
+    <p>{{poem.poem}}</p>
+  </div>
+</div>
+
+{% endblock %}

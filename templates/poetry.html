@@ -4,14 +4,20 @@
 <h1 class="text-center p-3">Poems</h1>
 
 <div class="text-center">
-  <a class="btn btn-primary" type="submit" href='/poetry/new'>Upload New Poem</a>
+  <a type="submit" href='/poetry/new'>Upload New Poem</a>
 </div>
 
-<div class='row m-5'>
+<div class='row m-3'>
   {% for poem in poems %}
-      <div class='card col-md-4 p-5'>
+      <div class='container-fluid p-5 my-5 border border-info' style="height: 60vh; width: 40vw; background-image: url('/static/images/poem-bg-3.png')">
+        <!-- title -->
+        <div class="text-center text-uppercase">
           <h2><a href='/poems/{{ poem._id }}'>{{ poem.title }}</a></h2>
-          <small>{{ poem.poem }}</small>
+        </div>
+        <!-- description -->
+        <div>
+          <p>{{ poem.poem }}</p>
+        </div>
       </div>
   {% endfor %}
 </div>
