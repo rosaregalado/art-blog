@@ -14,6 +14,7 @@ poems = db.poems
 
 
 app = Flask(__name__)
+app.secret_key = 'mysecretnooneknows'
 
 # ----------------------------------------------------------
 # users routes
@@ -102,5 +103,5 @@ def stories():
 
 
 if __name__ == "__main__":
-  app.secret_key = 'mysecretnooneknows'
   app.run(debug=True)
+  
