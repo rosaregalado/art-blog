@@ -84,13 +84,17 @@ def new_poem():
 
 @app.route('/poetry', methods=['POST'])
 def submit_poem():
-  poem = {
-    'title': request.form.get('title'),
-    'poem': request.form.get('poem')
-  }
-  poem_id = poems.insert_one(poem).inserted_id
-  flash("Successfully added a new poem", "success")
-  return redirect(url_for('poetry', poem_id=poem_id))
+  if 'username' in session:
+    poem = {
+      'title': request.form.get('title'),
+      'poem': request.form.get('poem')
+    }
+    poem_id = poems.insert_one(poem).inserted_id
+    flash("Successfully added a new poem", "success")
+    return redirect(url_for('poetry', poem_id=poem_id))
+  else:
+    flash("You must be logged in to continue", "warning")
+    return redirect(url_for('index'))
 
 
 @app.route('/stories')
