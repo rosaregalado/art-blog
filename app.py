@@ -55,11 +55,12 @@ def login():
       return redirect(url_for('profile'))
 
   # if password is wrong or username doesnt exist
-  flash('Invalid username/password combination', 'danger')
-  return redirect(url_for('login'))
+  return 'Invalid username/password combination'
 
 @app.route('/logout')
 def logout():
+  session.pop('username')
+  flash("logged out", "warning")
   return redirect(url_for('login'))
 # ----------------------------------------------------------
 # other routes
