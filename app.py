@@ -55,7 +55,8 @@ def login():
       return redirect(url_for('profile'))
 
   # if password is wrong or username doesnt exist
-  return 'Invalid username/password combination'
+  flash('Invalid username/password combination', 'danger')
+  return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
@@ -81,17 +82,13 @@ def new_poem():
 
 @app.route('/poetry', methods=['POST'])
 def submit_poem():
-  if 'username' in session:
-
-    poem = {
-      'title': request.form.get('title'),
-      'poem': request.form.get('poem')
-    }
-    poem_id = poems.insert_one(poem).inserted_id
-    return redirect(url_for('poetry', poem_id=poem_id))
-  else:
-    flash("Login required", "warning")
-    return redirect(url_for('index'))
+  poem = {
+    'title': request.form.get('title'),
+    'poem': request.form.get('poem')
+  }
+  poem_id = poems.insert_one(poem).inserted_id
+  flash("Successfully added a new poem", "success")
+  return redirect(url_for('poetry', poem_id=poem_id))
 
 
 @app.route('/stories')
