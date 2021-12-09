@@ -102,5 +102,5 @@ def stories():
 
 
 if __name__ == "__main__":
-  app.secret_key = 'mysecret'
+  app.secret_key = 'mysecretnooneknows'
   app.run(debug=True)
