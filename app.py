@@ -5,8 +5,8 @@ import os
 import bcrypt
 
 host = os.environ.get('MONGODB_URI')
-client = MongoClient(host)
-db = client.ecommerce_app
+client = MongoClient(host=host)
+db = client.art_blog
 
 # db resources
 users = db.users
