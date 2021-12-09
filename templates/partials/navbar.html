@@ -1,23 +1,29 @@
-<nav class='navbar navbar-light' style="background-color: #ffd280;">
+<nav class='navbar navbar-light' style="background-color: #7bc2f1;">
   <div class='container-fluid justify-content-evenly'>
     <nav class="navbar navbar-expand ">
       <div class="container-fluid ">
-        <a class="navbar-brand fs-1 px-5" style='font-family: papyrus;' href="{{ url_for('index') }}">My Art Blog</a>
+        <a class="navbar-brand fs-1 px-5" style='font-family: papyrus;' href="{{ url_for('profile') }}">Art Blog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item px-3">
-              <a class="nav-link" href="{{ url_for('inspiration') }}">Inspiration</a>
+              <a class="nav-link" href="{{ url_for('poetry') }}">Poetry</a>
             </li>
             <li class="nav-item px-3">
-              <a class="nav-link" href="{{ url_for('poems') }}">Poems</a>
+              <a class="nav-link" href="{{ url_for('photography') }}">Photography</a>
             </li>
             <li class="nav-item px-3">
               <a class="nav-link" href="{{ url_for('stories') }}">Short Stories</a>
             </li>
+            <li class="nav-item px-5">
+              <div>
+                <a class="nav-link" href="{{ url_for('index') }}">Log out</a>
+              </div>
+            </li>
           </ul>
+          
         </div>
       </div>
     </nav>

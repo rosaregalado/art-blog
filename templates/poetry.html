@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center p-3">Poems</h1>
+
+<div class="text-center">
+  <a class="btn btn-primary" type="submit" href='/poetry/new'>Upload New Poem</a>
+</div>
+
+<div class='row m-5'>
+  {% for poem in poems %}
+      <div class='card col-md-4 p-5'>
+          <h2><a href='/poems/{{ poem._id }}'>{{ poem.title }}</a></h2>
+          <small>{{ poem.poem }}</small>
+      </div>
+  {% endfor %}
+</div>
+{% endblock %}

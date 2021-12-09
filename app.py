@@ -10,6 +10,7 @@ db = client.ecommerce_app
 
 # db resources
 users = db.users
+poems = db.poems
 
 
 app = Flask(__name__)
@@ -19,11 +20,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-  if 'username' in session:
+  # if 'username' in session:
     # return 'You are logged in as ' + session['username']
-    return redirect(url_for('profile'))
-
-
+    return render_template('index.html')
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -31,6 +30,7 @@ def register():
     existing_user = users.find_one({'name': request.form['username']})
 
     if existing_user is None:
+      # hash password
       hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8') , bcrypt.gensalt())
       users.insert({'name': request.form['username'], 'password': hashpass})
       # create session
@@ -48,19 +48,17 @@ def login():
 
   if login_user:
     # checks if passwords are same
-    if bcrypt.hashpw(request.form['pass'], login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+    if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password']) == login_user['password']:
       # add user to session
       session['username'] = request.form['username']
-      return redirect(url_for('login_index'))
+      flash("Login successful", "success")
+      return redirect(url_for('profile'))
 
   # if password is wrong or username doesnt exist
   return 'Invalid username/password combination'
 
 @app.route('/logout')
 def logout():
-  session['username'] = None
-  session['password'] = None
-  
   return redirect(url_for('login'))
 # ----------------------------------------------------------
 # other routes
@@ -69,13 +67,32 @@ def logout():
 def profile():
   return render_template('profile.html')
 
-@app.route('/inspiration')
-def inspiration():
-  return render_template('inspiration.html')
+@app.route('/photography')
+def photography():
+  return render_template('photography.html')
 
-@app.route('/poems')
-def poems():
-  return render_template('poems.html')
+@app.route('/poetry')
+def poetry():
+  return render_template('poetry.html', poems=poems.find())
+
+@app.route('/poetry/new')
+def new_poem():
+  return render_template('new_poem.html', poem = {}, title="Upload New Poem")
+
+@app.route('/poetry', methods=['POST'])
+def submit_poem():
+  if 'username' in session:
+
+    poem = {
+      'title': request.form.get('title'),
+      'poem': request.form.get('poem')
+    }
+    poem_id = poems.insert_one(poem).inserted_id
+    return redirect(url_for('poetry', poem_id=poem_id))
+  else:
+    flash("Login required", "warning")
+    return redirect(url_for('index'))
+
 
 @app.route('/stories')
 def stories():
