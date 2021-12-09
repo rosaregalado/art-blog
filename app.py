@@ -4,7 +4,7 @@ from bson.objectid import ObjectId
 import os
 import bcrypt
 
-host = os.environ.get('MONGODB_URI')
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/art-blog')
 client = MongoClient(host=host)
 db = client.art_blog
 
@@ -32,7 +32,7 @@ def register():
     if existing_user is None:
       # hash password
       hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8') , bcrypt.gensalt())
-      users.insert({'name': request.form['username'], 'password': hashpass})
+      users.insert_one({'name': request.form['username'], 'password': hashpass})
       # create session
       session['username'] = request.form['username']
       return redirect(url_for('index'))
