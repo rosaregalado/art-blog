@@ -105,4 +105,4 @@ def stories():
 
 if __name__ == "__main__":
   app.secret_key = 'mysecret'
-  app.run(debug=True)
+  app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 5000))
