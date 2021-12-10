@@ -34,6 +34,7 @@ def register():
     if existing_user is None:
       # hash password
       hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8') , bcrypt.gensalt())
+      # add to db
       users.insert_one({'name': request.form['username'], 'password': hashpass})
       # create session
       session['username'] = request.form['username']
@@ -115,7 +116,6 @@ def update_poem(poem_id):
   )
   # redirect to poetry main page
   return redirect(url_for('view_poetry', poem_id=poem_id))
-
 
 # delete poem
 @app.route('/poems/<poem_id>/delete', methods=['POST'])

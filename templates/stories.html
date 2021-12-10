@@ -1,6 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1 class="text-center p-5"> Short Stories</h1>
+  <h1 class="text-center p-5"> My Short Stories</h1>
+
+  <!-- short stories -->
+  <div class="border p-5">
+    <div class="clearfix">
+      <img src="{{ url_for('static', filename='stories-images/img-1.jpeg')}}" class="col-md-6 float-md-end mb-3 ms-md-3">
+      <h3 class="p-3 text-center">Maine to the Rescue</h3>
+      <p>
+        "Oh, dear! oh, dear! It's snowing!"
+        "Hurrah! hurrah! It's snowing!"
+
+        Massachusetts looked up from her algebra. She was the head of the school. She was rosy and placid as the apple she was generally eating when not in class. Apples and algebra were the things she cared most about in school life.
+      </p>
+    
+      <p>
+        "Whence come these varying cries?" she said, taking her feet off the fender and trying to be interested, though her thoughts went on with "a 1/6 b =" etc.
+
+        "Oh, Virginia is grumbling because it is snowing, and Maine is feeling happy over it, that's all!" said Rhode Island, the smallest girl in Miss Wayland's school.
+
+        "Poor Virginia! It is rather hard on you to have snow in March, when you have just got your box of spring clothes from home."
+      </p>
+    
+      <p>
+        "It is atrocious!" said Virginia, a tall, graceful, languishing girl. "How could they send me to such a place, where it is winter all the spring? Why, at home the violets are in blossom, the trees are coming out, the birds singing--"
+
+        "And at home," broke in Maine, who was a tall girl, too, but lithe and breezy as a young willow, with flyaway hair and dancing brown eyes, "at home all is winter--white, beautiful, glorious winter, with ice two or three feet thick on the rivers, and great fields and fields of snow, all sparkling in the sun, and the sky a vast sapphire overhead, without a speck. Oh, the glory of it, the splendor of it! And here--here it is neither fish, flesh, fowl, nor good red herring. A wretched, makeshift season, which they call winter because they don't know what else to call it."
+
+        "Come! come!" said Old New York, who was seventeen years old and had her own ideas of dignity. "Let us alone, you two outsiders! We are neither Eskimos nor Hindoos, it is true, but the Empire State would not change climates with either of you."
+      </p>
+    </div>
+  </div>
 
 {% endblock %}
