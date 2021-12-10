@@ -11,6 +11,12 @@
   <div class="p-5">
     <h1 class="text-center pb-3">{{poem.title}}</h1>
     <p>{{poem.poem}}</p>
+    <p>{{ poem.date_created }}</p>
+
+    <!-- edit and delete buttons -->
+    <div class="p-2">
+      <button type="button" class="btn btn-outline-success"><a href="/poems/{{ poem._id }}/edit">Edit Poem</a></button>
+    </div>
   </div>
 </div>
 

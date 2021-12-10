@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class='p-3 m-5'>
+  <button type="button" class='btn btn-primary fs-4'><a style="text-decoration: none; color: white;" href='/poetry'>
+    Go back</a>
+  </button>
+</div>
+
 <div class="row">
-  <div class="p-5 col-md-6 col-md-offset-3">
-    <fieldset>
-      <legend class="text-center">Upload New Poem</legend>
+  <form method='POST' action="/poems/{{poem._id}}">
+    <div class="row">
+      <fieldset>
+        <legend class="text-center">Update Poem</legend>
       
-      <form method="POST" action="/poetry">
         <!-- title -->
         <div class="form-group">
           <label for="image">Title</label><br>
@@ -20,18 +26,15 @@
         <!-- date created -->
         <div class='form-group'>
           <label for="date_created">Date Created</label><br>
-          <input style='width: 25rem;' class='form-control' id='date_created' type="date" name='date_created' value='{{poem.date_created}}'required/>
+          <input style='width: 25rem;' class='form-control' id='date_created' type="date" name='date_created' value='{{ poem.date_created }}'required/>
         </div>
-
+        <!-- Button -->
+          <div class="form-group p-4">
+            <button class='btn btn-success' type='submit'>Save Poem</button>
+          </div>
+      </div>
       </fieldset>
-      <!-- Button -->
-        <div class="form-group p-4">
-          <button class='btn btn-success' type='submit'>Save Poem</button>
-        </div>
-    </form>
-  </div>
+  </form>
 </div>
 
 {% endblock %}
-
-

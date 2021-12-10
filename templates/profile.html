@@ -1,31 +1,9 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 
-<!-- add new nav: Most popular news -->
-
-<div style="background-image: url('/static/images/profile-bg.jpeg'); background-attachment: fixed;">
-  <h1 class="text-center p-5">Latest News</h1>
-
-  <nav>
-    <ul class="nav justify-content-start">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Art</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Links</a>
-      </li>
-    </ul>
-  </nav>
-
-</div>
-
+<!-- Login flash message -->
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
@@ -33,5 +11,118 @@
     {% endfor %}
   {% endif %}
 {% endwith %}
+
+<div class="container-fluid margin-none" style="background-image: url('/static/images/profile-bg-1.jpeg'); background-attachment: fixed;">
+  <h2 class="text-center p-5">Top News</h2>
+  <!-- news nav -->
+  <nav>
+    <ul class="nav nav-tabs justify-content-start">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Browse</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Recent</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Recommendations</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Most Trending</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- latest news cards -->
+  <div>
+    <!-- row 1 -->
+    <div class="m-5 d-flex flex-row" style="padding-left: 5%; padding-right: 5%;">
+      <div class="card m-3" style="width: 25rem;">
+        <img src="{{ url_for('static', filename='news-images/img-1.jpeg')}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Metropolitan Museum of Art to Remove Sackler Name from Galleries</h5>
+          <p class="card-text fw-light">Two years after the Metropolitan Museum of Art in New York said it would stop taking donations from the Sacklers, the institution announced plans to remove the family’s name from galleries within its walls...</p>
+          <a href="#" class="btn btn-primary">Read Article</a>
+        </div>
+      </div>
+
+      <div class="card m-3" style="width: 25rem;">
+        <img src="{{ url_for('static', filename='news-images/img-2.jpeg')}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Warhol Foundation Seeks Supreme Court Review of Lynn Goldsmith’s Prince Portraits Case</h5>
+          <p class="card-text fw-light">The Andy Warhol Foundation in New York is lobbying the Supreme Court to review a copyright infringement case involving a 1981 photograph of Prince by Lynn Goldsmith and a 1984 series of paintings by the Pop artist based on it...</p>
+          <a href="#" class="btn btn-primary">Read Article</a>
+        </div>
+      </div>
+
+      <div class="card m-3" style="width: 25rem;">
+        <img src="{{ url_for('static', filename='news-images/img-3.jpeg')}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Getty Museum Acquires Bearded Roman Bust of Young Man in Need of Shave</h5>
+          <p class="card-text fw-light">The Getty Museum in Los Angeles has acquired a marble bust from the first century related to the Roman ritual surrounding the first shaving of a young man’s beard...</p>
+          <a href="#" class="btn btn-primary">Read Article</a>
+        </div>
+      </div>
+    </div>
+    <!-- row 2 -->
+    <div class="m-5 d-flex flex-row" style="padding-left: 5%; padding-right: 5%;">
+      <div class="card m-3" style="width: 25rem;">
+        <img src="{{ url_for('static', filename='news-images/img-4.jpeg')}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">ADAA Foundation Names James Cohan President, Foundation Grant Recipients</h5>
+          <p class="card-text fw-light">The ADAA Foundation, a grant-giving entity related to the nonprofit organization Art Dealers Association of America, has named a new president and the recipients of its six grants for 2021...</p>
+          <a href="#" class="btn btn-primary">Read Article</a>
+        </div>
+      </div>
+
+      <div class="card m-3" style="width: 25rem;">
+        <img src="{{ url_for('static', filename='news-images/img-5.jpeg')}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Rijksmuseum Seeks $170 M. from Dutch Government to Acquire Rembrandt Painting</h5>
+          <p class="card-text fw-light">The Dutch government seems set to back the Rijksmuseum museum’s purchase of a €175 million ($198 million) Rembrandt self-portrait, the Amsterdam institution announced on Wednesday...</p>
+          <a href="#" class="btn btn-primary">Read Article</a>
+        </div>
+      </div>
+
+      <div class="card m-3" style="width: 25rem;">
+        <img src="{{ url_for('static', filename='news-images/img-6.jpeg')}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Aziz Hazara Takes $100,000 Future Generation Art Prize for Video About Afghan Resilience</h5>
+          <p class="card-text fw-light">Aziz Hazara, a young artist based in Berlin and Kabul, Afghanistan, is this year’s winner of the Future Generation Art Prize, one of the biggest awards for emerging artists with a take-home prize of $100,000...</p>
+          <a href="#" class="btn btn-primary">Read Article</a>
+        </div>
+      </div>
+    </div>
+    <!-- row 3 -->
+    <div class="m-5 d-flex flex-row" style="padding-left: 5%; padding-right: 5%;">
+      <div class="card m-3" style="width: 25rem;">
+        <img src="{{ url_for('static', filename='news-images/img-1.jpeg')}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Metropolitan Museum of Art to Remove Sackler Name from Galleries</h5>
+          <p class="card-text fw-light">Two years after the Metropolitan Museum of Art in New York said it would stop taking donations from the Sacklers, the institution announced plans to remove the family’s name from galleries within its walls...</p>
+          <a href="#" class="btn btn-primary">Read Article</a>
+        </div>
+      </div>
+
+      <div class="card m-3" style="width: 25rem;">
+        <img src="{{ url_for('static', filename='news-images/img-2.jpeg')}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Warhol Foundation Seeks Supreme Court Review of Lynn Goldsmith’s Prince Portraits Case</h5>
+          <p class="card-text fw-light">The Andy Warhol Foundation in New York is lobbying the Supreme Court to review a copyright infringement case involving a 1981 photograph of Prince by Lynn Goldsmith and a 1984 series of paintings by the Pop artist based on it...</p>
+          <a href="#" class="btn btn-primary">Read Article</a>
+        </div>
+      </div>
+
+      <div class="card m-3" style="width: 25rem;">
+        <img src="{{ url_for('static', filename='news-images/img-3.jpeg')}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Getty Museum Acquires Bearded Roman Bust of Young Man in Need of Shave</h5>
+          <p class="card-text fw-light">The Getty Museum in Los Angeles has acquired a marble bust from the first century related to the Roman ritual surrounding the first shaving of a young man’s beard...</p>
+          <a href="#" class="btn btn-primary">Read Article</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+
 
 {% endblock %}

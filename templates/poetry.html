@@ -4,21 +4,45 @@
 <h1 class="text-center p-3">Poems</h1>
 
 <div class="text-center">
-  <a type="submit" href='/poetry/new'>Upload New Poem</a>
+  <button type="button" class="btn btn-outline-success">
+    <a href='/poetry/new'>Upload New Poem</a>
+  </button>
 </div>
 
-<div class='row m-3'>
+
+<div class=' m-3'>
   {% for poem in poems %}
-      <div class='container-fluid p-5 my-5 border border-info' style="height: 60vh; width: 40vw; background-image: url('/static/images/poem-bg-3.png')">
+    <div style=" background-color: white;">
+      <div class='p-5 m-3 border border-info' style="background-image: url('/static/images/poem-bg-2.jpeg'); width: 60vw;">
         <!-- title -->
-        <div class="text-center text-uppercase">
+        <div class="text-center " style="font-family: cursive;">
           <h2><a href='/poems/{{ poem._id }}'>{{ poem.title }}</a></h2>
         </div>
         <!-- description -->
-        <div>
-          <p>{{ poem.poem }}</p>
+        <div class="p-3">
+          <div class=" p-3 border border-secondary border-1">
+            <p>{{ poem.poem }}</p>
+          </div>
+        </div>
+        <!-- date created -->
+        <div class="p-2">
+          <p class="d-flex align-items-end justify-content-end" style="color: blue;">{{ poem.date_created }}</p>
+          <!-- edit poem-->
+          <p><a href='/poems/{{ poem._id }}/edit'>Edit</a></p>
+          <!-- delete poem -->
+          <p><form method='POST' action='/poems/{{ poem._id }}/delete'>
+            <button class='btn btn-outline-danger' type='submit'>Delete</button>
+          </form></p>
+
+          <!-- delete button -->
+          <!-- <div class="p-2">
+            <button type="button" class="btn btn-outline-primary"><a href="/poems/{{ poem._id }}/edit">Edit Poem</a></button>
+          </div> -->
         </div>
       </div>
+    </div>
+    
+
   {% endfor %}
 </div>
 

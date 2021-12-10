@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
 import bcrypt
+import datetime
 
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/art-blog')
 client = MongoClient(host=host)
@@ -54,7 +55,6 @@ def login():
       session['username'] = request.form['username']
       flash("Login successful", "success")
       return redirect(url_for('profile'))
-
   # if password is wrong or username doesnt exist
   return 'Invalid username/password combination'
 
@@ -80,7 +80,8 @@ def submit_poem():
   if 'username' in session:
     poem = {
       'title': request.form.get('title'),
-      'poem': request.form.get('poem')
+      'poem': request.form.get('poem'),
+      'date_created': request.form.get('date_created')
     }
     poem_id = poems.insert_one(poem).inserted_id
     flash("Successfully added a new poem", "success")
@@ -94,7 +95,33 @@ def view_poem(poem_id):
   poem = poems.find_one({'_id': ObjectId(poem_id)})
   return render_template('view_poem.html', poem=poem)
 
+# edit poem
+@app.route('/poems/<poem_id>/edit')
+def edit_poem(poem_id):
+  poem = poems.find_one({'id': ObjectId(poem_id)})
+  return render_template('edit_poem.html', poem=poem)
 
+# update poem
+@app.route('/poems/<poem_id>', methods=['POST'])
+def update_poem(poem_id):
+  updated_poem = {
+    'title': request.form.get('title'),
+    'poem': request.form.get('poem'),
+    'date_created': request.form.get('date_created')
+  }
+  poems.update_one(
+    {'_id': ObjectId(poem_id)},
+    {'$set': updated_poem}
+  )
+  # redirect to poetry main page
+  return redirect(url_for('view_poetry', poem_id=poem_id))
+
+
+# delete poem
+@app.route('/poems/<poem_id>/delete', methods=['POST'])
+def delete_poem(poem_id):
+  poems.delete_one({'_id': ObjectId(poem_id)})
+  return redirect(url_for('poetry'))
 
 # ----------------------------------------------------------
 # other routes
