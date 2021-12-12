@@ -1,0 +1,20 @@
+<fieldset>
+  <legend class="text-center">Update Poem</legend>
+
+  <!-- title -->
+  <div class="form-group">
+    <label for="image">Title</label><br>
+    <input class='form-control' id='title' name='title' type="text" value="{{ poem.title }}" required>
+  </div>
+  <!-- poem -->
+  <div class='form-group'>
+    <label for='description'>Poem</label><br>
+    <textarea class='form-control' id='poem' type='text' name='poem' value='{{ poem.poem }}' required></textarea>
+  </div>
+  <!-- date created -->
+  <div class='form-group'>
+    <label for="date_created">Date Created</label><br>
+    <input style='width: 25rem;' class='form-control' id='date_created' type="date" name='date_created' value='{{ poem.date_created }}'required/>
+  </div>
+</div>
+</fieldset>

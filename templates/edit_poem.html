@@ -5,36 +5,16 @@
   <button type="button" class='btn btn-primary fs-4'><a style="text-decoration: none; color: white;" href='/poetry'>
     Go back</a>
   </button>
-</div>
 
-<div class="row">
-  <form method='POST' action="/poems/{{poem._id}}">
-    <div class="row">
-      <fieldset>
-        <legend class="text-center">Update Poem</legend>
-      
-        <!-- title -->
-        <div class="form-group">
-          <label for="image">Title</label><br>
-          <input class='form-control' id='title' name='title' type="text" value="{{ poem.title }}" required>
-        </div>
-        <!-- poem -->
-        <div class='form-group'>
-          <label for='description'>Poem</label><br>
-          <textarea class='form-control' id='poem' type='text' name='poem' value='{{ poem.poem }}' required></textarea>
-        </div>
-        <!-- date created -->
-        <div class='form-group'>
-          <label for="date_created">Date Created</label><br>
-          <input style='width: 25rem;' class='form-control' id='date_created' type="date" name='date_created' value='{{ poem.date_created }}'required/>
-        </div>
-        <!-- Button -->
-          <div class="form-group p-4">
-            <button class='btn btn-success' type='submit'>Save Poem</button>
-          </div>
+  <div class="row">
+    <form method='POST' action="/{{poem._id}}">
+      <input type='hidden' name='_method' value='PUT'/>
+      {% include 'partials/poem_form.html' %}
+      <!-- Button -->
+      <div class="form-group p-4">
+        <button class='btn btn-success' type='submit'>Save Poem</button>
       </div>
-      </fieldset>
-  </form>
+    </form>
+  </div>
 </div>
-
 {% endblock %}

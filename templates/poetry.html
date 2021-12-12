@@ -2,25 +2,24 @@
 <!-- style="background-image: url('/static/images/profile-bg-2.jpeg'); width: 100%;" -->
 {% block content %}
 
+
+
 <!-- flash alert -->
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
-      <div class='text-center alert alert-{{ category }}'>{{ message }}</div>
+      <div class='m-5 text-center alert alert-{{ category }}'>{{ message }}</div>
     {% endfor %}
   {% endif %}
 {% endwith %}
 
-<div style="background-image: url('/static/images/profile-bg-2.jpeg'); background-attachment: fixed;">
+<div class="container" style="background-image: url('/static/images/poetry-bg-00.png'); background-attachment: fixed">
   <h1 class="text-center p-5">My Poems</h1>
-
   <div class="text-center">
     <button type="button" class="btn btn-outline-primary">
       <a href='/poetry/new'>Upload New Poem >></a>
     </button>
   </div>
-
-
   <div class=' m-3'>
     {% for poem in poems %}
       <div>
@@ -44,11 +43,6 @@
             <p><form method='POST' action='/poems/{{ poem._id }}/delete'>
               <button class='btn btn-outline-danger' type='submit'>Delete</button>
             </form></p>
-
-            <!-- delete button -->
-            <!-- <div class="p-2">
-              <button type="button" class="btn btn-outline-primary"><a href="/poems/{{ poem._id }}/edit">Edit Poem</a></button>
-            </div> -->
           </div>
         </div>
       </div>

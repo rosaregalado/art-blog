@@ -6,3 +6,7 @@ a {
 p {
   color: black;
 }
+
+p a {
+  text-decoration: underline;
+}

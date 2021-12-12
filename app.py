@@ -120,6 +120,7 @@ def update_poem(poem_id):
 # delete poem
 @app.route('/poems/<poem_id>/delete', methods=['POST'])
 def delete_poem(poem_id):
+  flash("You deleted a poem!", "danger")
   poems.delete_one({'_id': ObjectId(poem_id)})
   return redirect(url_for('poetry'))
 
