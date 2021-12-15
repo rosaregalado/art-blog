@@ -1,6 +1,7 @@
 ABOUT
 -----------------------------------------------------------------------------
-This project is an art blog application using Flask framework.
+This project is an art blog application using python, Flask framework, and bootstrap.
+You can Create, Read, Update, Delete poems 
 
 Live Website
 -----------------------------------------------------------------------------
